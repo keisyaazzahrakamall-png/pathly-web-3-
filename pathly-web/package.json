@@ -1,0 +1,19 @@
+{
+  "name": "pathly-career-readiness",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test",
+    "check": "npm test && npm run build"
+  },
+  "devDependencies": {
+    "vite": "^8.2.2"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.113.0"
+  }
+}
