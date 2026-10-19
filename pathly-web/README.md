@@ -194,3 +194,31 @@ See [privacy.html](privacy.html) for the in-app privacy summary. Use private sub
 ## License and team
 
 Copyright © 2026 Keisya Azzahra Kamal / VELORA. Created for the ITECHNO CUP 2026 Web Development submission. No open-source license has been granted; reuse requires the project owner's permission.
+
+## Docker Setup
+
+### Prerequisites
+- Docker Desktop
+- Git
+- Internet connection for Supabase services
+
+### Clone Repository
+```bash
+git clone https://github.com/keisyaazzahrakamall-png/PATHLY.git
+cd PATHLY
+
+## Docker Setup
+
+### Prerequisites
+- Docker Desktop
+- Git
+- Internet connection for Supabase services
+
+### Environment Variables
+Copy `.env.example` to `.env`.
+
+Required variables:
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
