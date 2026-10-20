@@ -2,7 +2,7 @@
 
 **Understand your skills, identify gaps, and build your career path.**
 
-A career-readiness web application for D3, D4, and bachelor's students, created by **VELORA for ITECHNO CUP 2026**. Pathly connects career exploration, self-assessment, skill-gap analysis, reflection, and a personal roadmap in one account.
+A career-readiness web application for D3, D4, and bachelor's students. Pathly connects career exploration, self-assessment, skill-gap analysis, reflection, and a personal roadmap in one account.
 
 - Repository: https://github.com/keisyaazzahrakamall-png/pathly-web-3-
 - Docker local access: http://localhost:5173
