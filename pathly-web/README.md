@@ -4,8 +4,8 @@
 
 A career-readiness web application for D3, D4, and bachelor's students, created by **VELORA for ITECHNO CUP 2026**. Pathly connects career exploration, self-assessment, skill-gap analysis, reflection, and a personal roadmap in one account.
 
-- Existing live demo: https://pathly-velora.vercel.app/
-- Repository: https://github.com/keisyaazzahrakamall-png/PATHLY
+- Repository: https://github.com/keisyaazzahrakamall-png/pathly-web-3-
+- Docker local access: http://localhost:5173
 - This source package uses an English interface. The existing live demo changes only after you deploy this version.
 
 ## Quick start
@@ -197,28 +197,285 @@ Copyright © 2026 Keisya Azzahra Kamal / VELORA. Created for the ITECHNO CUP 202
 
 ## Docker Setup
 
+This section explains how to run Pathly using Docker from a fresh clone.
+
 ### Prerequisites
+
+Make sure the following are installed:
+
 - Docker Desktop
 - Git
 - Internet connection for Supabase services
+
+Check Docker:
+
+```bash
+docker version
+```
+
+---
 
 ### Clone Repository
+
+Clone the Week 6 repository:
+
 ```bash
-git clone https://github.com/keisyaazzahrakamall-png/PATHLY.git
-cd PATHLY
+git clone https://github.com/keisyaazzahrakamall-png/pathly-web-3-.git
+cd pathly-web-3-/pathly-web
+```
 
-## Docker Setup
-
-### Prerequisites
-- Docker Desktop
-- Git
-- Internet connection for Supabase services
+---
 
 ### Environment Variables
-Copy `.env.example` to `.env`.
+
+Copy `.env.example` and create a local `.env` file.
 
 Required variables:
 
 ```env
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+```
+
+Do not commit the real `.env` file or private credentials to GitHub.
+
+Pathly uses Supabase for authentication and database services, so an internet connection is required.
+
+---
+
+### Docker Configuration
+
+The project includes:
+
+- `Dockerfile`
+- `.dockerignore`
+
+The Docker image uses Node.js and runs the Vite development server inside the container.
+
+Container port:
+
+```text
+5173
+```
+
+---
+
+### Build Docker Image
+
+Run:
+
+```bash
+docker build -t pathly/pathly-web:week6 .
+```
+
+Check that the image was created:
+
+```bash
+docker image ls
+```
+
+You should see:
+
+```text
+pathly/pathly-web   week6
+```
+
+---
+
+### Run Docker Container
+
+Run Pathly using:
+
+```bash
+docker run -d --name pathly-app -p 5173:5173 --env-file .env pathly/pathly-web:week6
+```
+
+Port mapping:
+
+```text
+Host Port      : 5173
+Container Port : 5173
+```
+
+---
+
+### Check Container Status
+
+Run:
+
+```bash
+docker ps
+```
+
+The `pathly-app` container should have the status:
+
+```text
+Up
+```
+
+---
+
+### Open Pathly
+
+Open the application in your browser:
+
+```text
+http://localhost:5173
+```
+
+---
+
+### Verify the Application
+
+After the container starts, verify at least these three checks:
+
+1. The `pathly-app` container is running.
+2. The Pathly homepage opens successfully at `http://localhost:5173`.
+3. A core user function such as login, signup, or assessment works correctly.
+
+Example verification table:
+
+| Check ID | Verification | Expected Result |
+|---|---|---|
+| V-01 | Check `docker ps` | `pathly-app` is running |
+| V-02 | Open Pathly homepage | Homepage loads successfully |
+| V-03 | Test login/assessment | Core function works correctly |
+
+---
+
+### View Docker Logs
+
+To inspect the application logs:
+
+```bash
+docker logs pathly-app
+```
+
+To follow the logs continuously:
+
+```bash
+docker logs -f pathly-app
+```
+
+Successful startup should show Vite running on port `5173`.
+
+---
+
+### Inspect Container
+
+To inspect the Docker container configuration:
+
+```bash
+docker inspect pathly-app
+```
+
+---
+
+### Stop Container
+
+Stop Pathly using:
+
+```bash
+docker stop pathly-app
+```
+
+---
+
+### Remove Container
+
+After stopping it, remove the container using:
+
+```bash
+docker rm pathly-app
+```
+
+---
+
+### Run Again
+
+If the image already exists, run:
+
+```bash
+docker run -d --name pathly-app -p 5173:5173 --env-file .env pathly/pathly-web:week6
+```
+
+---
+
+### Troubleshooting
+
+#### Container does not appear in `docker ps`
+
+Check all containers:
+
+```bash
+docker ps -a
+```
+
+Then inspect the logs:
+
+```bash
+docker logs pathly-app
+```
+
+#### Browser cannot open Pathly
+
+Make sure:
+
+- Docker Desktop is running.
+- The container status is `Up`.
+- Port `5173` is not being used by another application.
+- The application is opened through:
+
+```text
+http://localhost:5173
+```
+
+#### Environment variables are missing
+
+Make sure `.env` exists in the project folder and contains:
+
+```env
+VITE_SUPABASE_URL=...
+VITE_SUPABASE_PUBLISHABLE_KEY=...
+```
+
+Do not upload the real `.env` file to GitHub.
+
+#### Port 5173 is already in use
+
+Stop the application currently using port `5173`, or remove an old Pathly container:
+
+```bash
+docker stop pathly-app
+docker rm pathly-app
+```
+
+Then run the container again.
+
+#### Docker image needs to be rebuilt
+
+If project files change, rebuild the image:
+
+```bash
+docker build -t pathly/pathly-web:week6 .
+```
+
+Then recreate the container.
+
+---
+
+### Handover Verification
+
+The Docker setup was also tested from a fresh clone on another device.
+
+The verifier successfully:
+
+1. Cloned the GitHub repository.
+2. Opened the `pathly-web` project directory.
+3. Built the Docker image.
+4. Started the Docker container.
+5. Verified the container using `docker ps`.
+6. Opened Pathly at `http://localhost:5173`.
+7. Tested the application's core functionality.
+
+This confirms that the project can be reproduced from a fresh clone using the documented instructions.
